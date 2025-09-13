@@ -8,7 +8,7 @@ export default function Header({ theme, setTheme }) {
         className="theme-toggle"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
-        {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        {theme === "dark" ? "☀️ Switch to Light Mode" : "🌙 Switch to Dark Mode"}
       </button>
     </header>
   );
