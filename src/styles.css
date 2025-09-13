@@ -111,7 +111,7 @@ body {
 }
 
 /* Mobile adjustment */
-@media (max-width: 650px) {
+@media (max-width: 760px) {
   .tab {
     padding: 6px 8px;      /* lebih kecil */
     font-size: 0.8rem;     /* kecilkan teks */
