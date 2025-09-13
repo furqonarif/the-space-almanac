@@ -1,0 +1,376 @@
+/* src/styles.css */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; padding: 0; }
+
+/* Variabel warna untuk tema gelap & terang.
+   Kita menambahkan kelas .dark / .light pada root (.app-root)
+   sehingga switching theme tinggal toggle class di App.jsx. */
+.app-root.dark {
+  --bg: #061019;
+  --panel: #0c1720;
+  --card: #0c1720;
+  --text: #e6eef6;
+  --muted: #9aa8b6;
+  --accent: #2dd4bf;
+  --tab-active-bg: rgba(255,255,255,0.06);
+  --shadow: 0 8px 24px rgba(2,6,23,0.6);
+}
+
+.app-root.light {
+  --bg: #e8f7ff;
+  --panel: #cad7e0;
+  --card: #f8fafb;
+  --text: #111827;
+  --muted: #4b5563;
+  --accent: #0ea5b7;
+  --tab-active-bg: rgba(3,102,214,0.06);
+  --shadow: 0 6px 18px rgba(10,20,30,0.06);
+}
+
+/* Body / root layout */
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Header */
+.app-root header {
+  display: flex;
+  flex-direction: column;   /* ubah ke column agar isi bisa center vertikal */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.app-root header h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.theme-toggle {
+  margin-left: 0;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--tab-active-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 120ms ease;
+}
+
+.theme-toggle:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Tabs (nav) */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 10px 16px;
+  background: transparent;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 2px solid rgba(117, 117, 117, 0.2);
+}
+
+/* Tab button */
+.tab {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+  transition: background-color 120ms ease, color 120ms ease, transform 80ms ease;
+}
+.tab:hover { transform: translateY(-2px); color: var(--text); }
+.tab.active {
+  background: var(--tab-active-bg);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+/* Mobile adjustment */
+@media (max-width: 600px) {
+  .tab {
+    padding: 6px 8px;      /* lebih kecil */
+    font-size: 0.8rem;     /* kecilkan teks */
+  }
+  .app-root header h1 {
+    font-size: 2rem;
+  }
+}
+
+/* Main content wrapper */
+.main-content {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* Basic list & items */
+.main-content ul { list-style: none; padding: 0; margin: 0; }
+.main-content li {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.main-content li:hover { background: rgba(255,255,255,0.02); }
+
+/* Stage 2 - ContentContainer */
+
+/* Search input */
+.search-input {
+  padding: 10px 14px;
+  margin: 14px 0;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.search-input::placeholder {
+  color: var(--muted);
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(45,212,191,0.3);
+}
+
+/* Back button */
+.back-button {
+  padding: 6px 10px;
+  margin-bottom: 12px;
+  border: 1px solid var(--accent); /* <-- Tambahan */
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 120ms ease, color 120ms ease;
+}
+.back-button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Detail view */
+.detail-view {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  line-height: 1.6;
+}
+
+.detail-view h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.detail-view p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.detail-view b {
+  color: var(--muted);
+  margin-right: 4px;
+}
+
+.detail-view pre {
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* List items update */
+.main-content li {
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: background-color 120ms ease, transform 100ms ease;
+}
+.main-content li:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateX(3px);
+}
+
+/* List container */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  justify-content: center;
+}
+
+/* List item as card */
+ul li {
+  flex: 1 1 220px;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+/* Hover effect */
+ul li:hover {
+  background: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* List title */
+ul li h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* List subtitle or small info */
+ul li p {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Pagination (tombol Prev / Next + indikator) */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.pagination .pagination-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.pagination .pagination-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: var(--accent);
+  color: #fff;
+}
+
+.pagination .pagination-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.page-indicator {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* sedikit spacing agar search input tetap center */
+.search-input {
+  display: block;
+  margin: 10px auto 18px;
+}
+
+/* Footer */
+footer {
+  padding: 12px 16px;
+  text-align: center;
+  color: var(--muted);
+  background: var(--panel);
+  border-top: 1px solid rgba(255,255,255,0.02);
+  font-size: 0.9rem;
+}
+
+/* Title dasar */
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  animation: glowCycle 4s infinite linear;
+}
+
+/* Light mode */
+.light .page-title {
+  color: #ffffff; /* hitam */
+}
+
+/* Dark mode */
+.dark .page-title {
+  color: #ffffff; /* putih */
+}
+
+/* Animasi glow looping */
+@keyframes glowCycle {
+  0% {
+    text-shadow: 0 0 5px #ff33cc, 0 0 10px #cc00ff, 0 0 20px #00ffc8;
+  }
+  25% {
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #33ccff, 0 0 20px #0066ff;
+  }
+  50% {
+    text-shadow: 0 0 5px #6600ff, 0 0 10px #cc00ff, 0 0 20px #ff33cc;
+  }
+  75% {
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #33ccff, 0 0 20px #0066ff;
+  }
+  100% {
+    text-shadow: 0 0 5px #6600ff, 0 0 10px #cc00ff, 0 0 20px #ff33cc;
+  }
+}
